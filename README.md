@@ -1,4 +1,4 @@
-# intern_proj
+# Intern Project
 
 This is a repository of Pisanu Boonyaanan about the intern project for KMUTT and KBTG.
 
