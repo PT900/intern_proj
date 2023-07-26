@@ -3,7 +3,7 @@
 This is a repository of Pisanu Boonyaanan about the intern project for KMUTT and KBTG.
 
 ## Noted
-The c code is my old code. Please don't use it.
+The C code is my old code. Please don't use it.
 
 ## Requirements
 1. Python
