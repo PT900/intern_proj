@@ -1,9 +1,20 @@
-web_rest("POST: testsaafdsaf",
-	"URL=testsaafdsaf",
+web_rest("POST: https://www.google.com",
+	"URL=https://www.google.com",
 	"Method=POST",
 	"EncType=raw",
 	"Snapshot=t1.inf",
-	"Body={   "username" : "my_username",   "password" : "my_password",   "validation-factors" : {      "validationFactors" : [         {            "name" : "remote_address",            "value" : "127.0.0.1"         }      ]   }}
+	"Body={
+	    "username": "my_username",
+	    "password": "my_password",
+	    "validation-factors": {
+	        "validationFactors": [
+	            {
+	                "name": "remote_address",
+	                "value": "127.0.0.1"
+	            }
+	        ]
+	    }
+	}
 	HEADERS,",
 	"Name=Content-Type", "Value=application/json", ENDHEADER,
-	LAST););
+	LAST);
