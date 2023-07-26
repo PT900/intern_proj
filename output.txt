@@ -1,8 +1,8 @@
-web_rest("POST: https://www.google.com",
-	"URL=https://www.google.com",
+web_rest("POST: https://www.example.com",
+	"URL=https://www.example.com",
 	"Method=POST",
 	"EncType=raw",
-	"Snapshot=t1.inf",
+	"Snapshot=t149224.inf",
 	"Body={
 	    "username": "my_username",
 	    "password": "my_password",

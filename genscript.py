@@ -1,10 +1,14 @@
 # Necessary library to formatting JSON request
 import json
+import random
 
 # Function to save file as file_name and fufill content inside text file
 def save_to_file(file_name, content):
     with open(file_name, 'w') as file:
         file.write(content)
+
+def generate_random_t1_inf():
+    return f"t{random.randint(0, 999999):6}.inf"
 
 # Function to edit the JSON request from input into LRE web_rest command
 def edit_request_with_input(url, json_input, headers):
@@ -12,12 +16,16 @@ def edit_request_with_input(url, json_input, headers):
     formatted_json = json.dumps(json_input, indent=4, ensure_ascii=False)
     indented_json = '\n\t'.join(formatted_json.splitlines())
 
-    request_string = ('web_rest("POST: my_url",\n'
-                        '\t"URL=my_url",\n'
-                        '\t"Method=POST",\n'
-                        '\t"EncType=raw",\n'
-                        '\t"Snapshot=t1.inf",\n'
-                        f'\t"Body={indented_json}\n\tHEADERS,",\n'
+    # Generate random t1.inf
+    t_inf = generate_random_t1_inf()
+
+    request_string = (f'web_rest("POST: my_url",\n'
+                        f'\t"URL=my_url",\n'
+                        f'\t"Method=POST",\n'
+                        f'\t"EncType=raw",\n'
+                        f'\t"Snapshot={t_inf}",\n'
+                        f'\t"Body={indented_json}\n'
+                        f'\tHEADERS,",\n'
                         f'\t{headers}')
 
     updated_request_string = request_string.replace("my_url", url)
