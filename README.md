@@ -10,6 +10,8 @@ This is a repository of Pisanu Boonyaanan about the intern project for KMUTT and
 ## Requirements
 1. Python (3.x.x ++)
 If you already have Python, you can use this script instantly because this script is not used a custom library.
+2. Git
+to use `git clone` and clone my project.
 
 ## How to use these script
 1. Clone my project with `git clone`
