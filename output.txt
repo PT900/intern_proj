@@ -1,20 +1,20 @@
-web_rest("POST: https://www.example.com",
-	"URL=https://www.example.com",
+web_rest("POST: sdfasdfadfadf",
+	"URL=sdfasdfadfadf",
 	"Method=POST",
 	"EncType=raw",
-	"Snapshot=t149224.inf",
-	"Body={
-	    "username": "my_username",
-	    "password": "my_password",
-	    "validation-factors": {
-	        "validationFactors": [
-	            {
-	                "name": "remote_address",
-	                "value": "127.0.0.1"
-	            }
-	        ]
-	    }
-	}
-	HEADERS,",
+	"Snapshot=t857987.inf",
+	"Body={\r\n
+	    "username": "my_username",\r\n
+	    "password": "my_password",\r\n
+	    "validation-factors": {\r\n
+	        "validationFactors": [\r\n
+	            {\r\n
+	                "name": "remote_address",\r\n
+	                "value": "127.0.0.1"\r\n
+	            }\r\n
+	        ]\r\n
+	    }\r\n
+	}",
+	HEADERS,
 	"Name=Content-Type", "Value=application/json", ENDHEADER,
 	LAST);
