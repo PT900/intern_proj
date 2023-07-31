@@ -4,8 +4,7 @@ This is a repository of Pisanu Boonyaanan about the intern project for KMUTT and
 
 ## Noted
 1. This is a WIP. Please don't expect too much. 🙏
-2. The C code is my old code. Please don't use it.
-3. This script only generates the web_rest part command in LRE. Not all of the script.
+2. This script only generates the web_rest part command in LRE. Not all of the script.
 
 ## Requirements
 1. Python (3.x.x ++)
