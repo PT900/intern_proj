@@ -13,7 +13,14 @@ def generate_random_t1_inf():
 
 # Function to format JSON into expect result
 def format_json(json_input):
-    formatted_json = json.dumps(json_input, indent=4).replace('\n', '\\r\\n\n\t')
+    # JSON format
+    formatted_json = json.dumps(json_input, indent=4, ensure_ascii=False)
+    # Add \r\n to eol before newline
+    formatted_json = formatted_json.replace('\n', '\\r\\n\n')
+    # Escape double quotes
+    formatted_json = formatted_json.replace('"', r'\"')
+    # Add double quotes to first and last
+    formatted_json = '\n'.join(f'\t"{line}"' for line in formatted_json.splitlines())
 
     return formatted_json
 
@@ -25,16 +32,17 @@ def edit_request_with_input(url, json_input, headers):
     # Generate random t1.inf
     t_inf = generate_random_t1_inf()
 
+    # formatted_json = formatted_json.replace('"', r'\"')  # Escape double quotes
+    # formatted_json = formatted_json.replace('\n', '\\r\\n\n\t')
+
     request_string = (f'web_rest("POST: {url}",\n'
                         f'\t"URL={url}",\n'
                         f'\t"Method=POST",\n'
                         f'\t"EncType=raw",\n'
                         f'\t"Snapshot={t_inf}",\n'
-                        f'\t"Body={formatted_json}",\n'
+                        f'\t"Body={formatted_json},\n'
                         f'\tHEADERS,\n'
                         f'\t{headers}')
-
-    # updated_request_string = request_string.replace("my_url", url)
 
     return request_string
 
