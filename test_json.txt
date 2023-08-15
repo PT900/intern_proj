@@ -10,3 +10,16 @@
       ]
    }
 }
+
+{
+   "username" : "username2",
+   "password" : "password2",
+   "validation-factors" : {
+      "validationFactors" : [
+         {
+            "name" : "remote_address",
+            "value" : "127.0.0.2"
+         }
+      ]
+   }
+}
