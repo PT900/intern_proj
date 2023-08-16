@@ -1,6 +1,10 @@
 # Necessary library to formatting JSON request
 import json
+import regex as re
 import random
+
+# Setup file path here
+file_path = r'C:\Users\peat2\kbtg\test_json.txt'
 
 # Function to save file as file_name and fufill content inside text file
 def save_to_file(file_name, content):
@@ -48,28 +52,54 @@ def edit_request_with_input(url, json_input, headers):
 
     return request_string
 
+# Function to find json request in .txt file
+def find_json_in_txt_file(file_path):
+    json_strings = []
+
+    with open(file_path, 'r') as file:
+        text = file.read()
+
+        # Regex to find JSON objects
+        json_pattern = r'\{(?:[^{}]|(?R))*\}'
+
+        matches = re.findall(json_pattern, text, flags=re.DOTALL)
+
+        json_strings.extend(matches)
+
+        # for match in matches:
+        #     try:
+        #         json_obj = json.loads(match)
+        #         json_objects.append(json_obj)
+        #     except json.JSONDecodeError:
+        #         pass
+
+    return json_strings
+
 # Default part
 if __name__ == "__main__":
+    json_strings = find_json_in_txt_file(file_path)
     # Input url
-    input_url = input("Input request url: ")
+    # input_url = input("Input request url: ")
+    input_url = "InTesting"
     # Input JSON request as Multi-line content
-    input_json = ''
-    print("Input request JSON: ")
-    while True:
-        line = input()
-        if not line:
-            break
-        input_json += line + '\n'
+    # input_json = ''
+    # print("Input request JSON: ")
+    # while True:
+    #     line = input()
+    #     if not line:
+    #         break
+    #     input_json += line + '\n'
 
     # Escape double quotes in the JSON input
     # input_json = escape_quotes(input_json)
 
     # Remove newline at the end of JSON input
-    input_json = input_json.rstrip()
+    # input_json = input_json.rstrip()
 
     # Format the JSON input with proper indentation
     try:
-        paresd_json = json.loads(input_json)
+        # paresd_json = json.loads(input_json)
+        paresd_json = json.loads(json_strings[1])
     except json.JSONDecodeError:
         print("Error: Invalid JSON format. Please provide valid JSON input.")
     else:
