@@ -32,4 +32,3 @@
     "author": "blog_user123",
     "tags": ["JSON", "APIs", "Web Development"]
 }
-

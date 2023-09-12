@@ -2,8 +2,10 @@ web_rest("POST: {URL}",
 	"URL={URL}",
 	"Method=POST",
 	"EncType=raw",
-	"Snapshot=t300493.inf",
+	"Snapshot=t244525.inf",
 	"Body={\r\n"
+	"{\r\n"
+	"\"customer_id\": 456,\r\n"
 	"\"order_items\": [\r\n"
 	"{\r\n"
 	"\"product_id\": 789,\r\n"

@@ -28,11 +28,11 @@ def format_json(json_input):
     lines = formatted_json.splitlines()
 
     formatted_json = lines[0] + '"\n'
-    formatted_json += '\n'.join(f'\t"{line}"' for line in lines[2:])
+    formatted_json += '\n'.join(f'\t"{line}"' for line in lines)
 
     return formatted_json
 
-# Function to edit the JSON request from input into LRE web_rest command
+# Function to edit the JSON request from input into VUGen web_rest command
 def edit_request_with_input(json_input):
     # Format the JSON input with proper indentation
     formatted_json = format_json(json_input)
@@ -78,7 +78,8 @@ if __name__ == "__main__":
         except json.JSONDecodeError:
             print("Error: Invalid JSON format. Please provide valid JSON input.")
             continue
-        # endheaders = '''"Name=Content-Type", "Value=application/json", ENDHEADER,\n\tLAST);'''
+
+        # Edit json from text file into VUGen web_rest format
         updated_request_string = edit_request_with_input(paresd_json)
 
         if updated_request_string:

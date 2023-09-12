@@ -2,8 +2,10 @@ web_rest("POST: {URL}",
 	"URL={URL}",
 	"Method=POST",
 	"EncType=raw",
-	"Snapshot=t106153.inf",
+	"Snapshot=t821207.inf",
 	"Body={\r\n"
+	"{\r\n"
+	"\"title\": \"Introduction to JSON Requests\",\r\n"
 	"\"content\": \"JSON requests are a common way to communicate with APIs.\",\r\n"
 	"\"author\": \"blog_user123\",\r\n"
 	"\"tags\": [\r\n"
