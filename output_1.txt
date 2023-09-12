@@ -1,0 +1,19 @@
+web_rest("POST: test1",
+	"URL=test1",
+	"Method=POST",
+	"EncType=raw",
+	"Snapshot=t906800.inf",
+	"Body={\r\n"
+	"\"password\": \"my_password\",\r\n"
+	"\"validation-factors\": {\r\n"
+	"\"validationFactors\": [\r\n"
+	"{\r\n"
+	"\"name\": \"remote_address\",\r\n"
+	"\"value\": \"127.0.0.1\"\r\n"
+	"}\r\n"
+	"]\r\n"
+	"}\r\n"
+	"}",
+	HEADERS,
+	"Name=Content-Type", "Value=application/json", ENDHEADER,
+	LAST);

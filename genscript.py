@@ -1,9 +1,8 @@
-# Necessary library to formatting JSON request
 import json
 import regex as re
 import random
 
-# Setup file path here
+# Setup request file path here
 file_path = r'C:\Users\peat2\kbtg\test_json.txt'
 
 # Function to save file as file_name and fufill content inside text file
@@ -66,47 +65,32 @@ def find_json_in_txt_file(file_path):
 
         json_strings.extend(matches)
 
-        # for match in matches:
-        #     try:
-        #         json_obj = json.loads(match)
-        #         json_objects.append(json_obj)
-        #     except json.JSONDecodeError:
-        #         pass
-
     return json_strings
 
 # Default part
 if __name__ == "__main__":
     json_strings = find_json_in_txt_file(file_path)
-    # Input url
-    # input_url = input("Input request url: ")
-    input_url = "InTesting"
-    # Input JSON request as Multi-line content
-    # input_json = ''
-    # print("Input request JSON: ")
-    # while True:
-    #     line = input()
-    #     if not line:
-    #         break
-    #     input_json += line + '\n'
 
-    # Escape double quotes in the JSON input
-    # input_json = escape_quotes(input_json)
+    for i, json_str in enumerate(json_strings):
+        # Input url
+        input_url = input(f"Input request url {i + 1}: ")
+        # input_url = "InTesting"
 
-    # Remove newline at the end of JSON input
-    # input_json = input_json.rstrip()
+        # Escape double quotes in the JSON input
+        # input_json = escape_quotes(input_json)
 
-    # Format the JSON input with proper indentation
-    try:
-        # paresd_json = json.loads(input_json)
-        paresd_json = json.loads(json_strings[1])
-    except json.JSONDecodeError:
-        print("Error: Invalid JSON format. Please provide valid JSON input.")
-    else:
+        # Remove newline at the end of JSON input
+        # input_json = input_json.rstrip()
+
+        # Format the JSON input with proper indentation
+        try:
+            paresd_json = json.loads(json_str)
+        except json.JSONDecodeError:
+            print("Error: Invalid JSON format. Please provide valid JSON input.")
+            continue
         input_headers = '''"Name=Content-Type", "Value=application/json", ENDHEADER,\n\tLAST);'''
         updated_request_string = edit_request_with_input(input_url, paresd_json, input_headers)
 
         if updated_request_string:
-            save_to_file("output.txt", updated_request_string)
-            print("Request has been saved to 'output.txt'.")
-
+            save_to_file(f"output_{i + 1}.txt", updated_request_string)
+            print(f"Request for JSON {i + 1} has been saved to 'output_{i + 1}.txt'.")
