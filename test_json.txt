@@ -12,14 +12,24 @@
 }
 
 {
-   "username" : "username2",
-   "password" : "password2",
-   "validation-factors" : {
-      "validationFactors" : [
-         {
-            "name" : "remote_address",
-            "value" : "127.0.0.2"
-         }
-      ]
-   }
+    "customer_id": 456,
+    "order_items": [
+        {
+            "product_id": 789,
+            "quantity": 2
+        },
+        {
+            "product_id": 101,
+            "quantity": 3
+        }
+    ],
+    "shipping_address": "123 Main St, Cityville"
 }
+
+{
+    "title": "Introduction to JSON Requests",
+    "content": "JSON requests are a common way to communicate with APIs.",
+    "author": "blog_user123",
+    "tags": ["JSON", "APIs", "Web Development"]
+}
+

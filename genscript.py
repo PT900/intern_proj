@@ -33,7 +33,7 @@ def format_json(json_input):
     return formatted_json
 
 # Function to edit the JSON request from input into LRE web_rest command
-def edit_request_with_input(json_input, headers):
+def edit_request_with_input(json_input):
     # Format the JSON input with proper indentation
     formatted_json = format_json(json_input)
 
@@ -47,7 +47,8 @@ def edit_request_with_input(json_input, headers):
                         f'\t"Snapshot={t_inf}",\n'
                         f'\t"Body={formatted_json},\n'
                         '\tHEADERS,\n'
-                        f'\t{headers}')
+                        '\t"Name=Content-Type", "Value=application/json", ENDHEADER,\n'
+                        '\tLAST);')
 
     return request_string
 
@@ -77,8 +78,8 @@ if __name__ == "__main__":
         except json.JSONDecodeError:
             print("Error: Invalid JSON format. Please provide valid JSON input.")
             continue
-        input_headers = '''"Name=Content-Type", "Value=application/json", ENDHEADER,\n\tLAST);'''
-        updated_request_string = edit_request_with_input(paresd_json, input_headers)
+        # endheaders = '''"Name=Content-Type", "Value=application/json", ENDHEADER,\n\tLAST);'''
+        updated_request_string = edit_request_with_input(paresd_json)
 
         if updated_request_string:
             save_to_file(f"output_{i + 1}.txt", updated_request_string)

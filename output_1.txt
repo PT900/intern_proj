@@ -2,7 +2,7 @@ web_rest("POST: {URL}",
 	"URL={URL}",
 	"Method=POST",
 	"EncType=raw",
-	"Snapshot=t972267.inf",
+	"Snapshot=t134715.inf",
 	"Body={\r\n"
 	"\"password\": \"my_password\",\r\n"
 	"\"validation-factors\": {\r\n"
