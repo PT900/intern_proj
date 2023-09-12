@@ -10,7 +10,7 @@ def save_to_file(file_name, content):
     with open(file_name, 'w') as file:
         file.write(content)
 
-# Function to random the t[100000-999999] for reality
+# Function to random the t[100000-999999] for realistically
 def generate_random_t1_inf():
     return f"t{random.randint(100000, 999999):6}.inf"
 
@@ -33,20 +33,20 @@ def format_json(json_input):
     return formatted_json
 
 # Function to edit the JSON request from input into LRE web_rest command
-def edit_request_with_input(url, json_input, headers):
+def edit_request_with_input(json_input, headers):
     # Format the JSON input with proper indentation
     formatted_json = format_json(json_input)
 
     # Generate random t1.inf
     t_inf = generate_random_t1_inf()
 
-    request_string = (f'web_rest("POST: {url}",\n'
-                        f'\t"URL={url}",\n'
-                        f'\t"Method=POST",\n'
-                        f'\t"EncType=raw",\n'
+    request_string = ('web_rest("POST: {URL}",\n'
+                        '\t"URL={URL}",\n'
+                        '\t"Method=POST",\n'
+                        '\t"EncType=raw",\n'
                         f'\t"Snapshot={t_inf}",\n'
                         f'\t"Body={formatted_json},\n'
-                        f'\tHEADERS,\n'
+                        '\tHEADERS,\n'
                         f'\t{headers}')
 
     return request_string
@@ -62,7 +62,6 @@ def find_json_in_txt_file(file_path):
         json_pattern = r'\{(?:[^{}]|(?R))*\}'
 
         matches = re.findall(json_pattern, text, flags=re.DOTALL)
-
         json_strings.extend(matches)
 
     return json_strings
@@ -72,16 +71,6 @@ if __name__ == "__main__":
     json_strings = find_json_in_txt_file(file_path)
 
     for i, json_str in enumerate(json_strings):
-        # Input url
-        input_url = input(f"Input request url {i + 1}: ")
-        # input_url = "InTesting"
-
-        # Escape double quotes in the JSON input
-        # input_json = escape_quotes(input_json)
-
-        # Remove newline at the end of JSON input
-        # input_json = input_json.rstrip()
-
         # Format the JSON input with proper indentation
         try:
             paresd_json = json.loads(json_str)
@@ -89,7 +78,7 @@ if __name__ == "__main__":
             print("Error: Invalid JSON format. Please provide valid JSON input.")
             continue
         input_headers = '''"Name=Content-Type", "Value=application/json", ENDHEADER,\n\tLAST);'''
-        updated_request_string = edit_request_with_input(input_url, paresd_json, input_headers)
+        updated_request_string = edit_request_with_input(paresd_json, input_headers)
 
         if updated_request_string:
             save_to_file(f"output_{i + 1}.txt", updated_request_string)

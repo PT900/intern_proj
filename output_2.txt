@@ -1,8 +1,8 @@
-web_rest("POST: test2",
-	"URL=test2",
+web_rest("POST: {URL}",
+	"URL={URL}",
 	"Method=POST",
 	"EncType=raw",
-	"Snapshot=t759250.inf",
+	"Snapshot=t684352.inf",
 	"Body={\r\n"
 	"\"password\": \"password2\",\r\n"
 	"\"validation-factors\": {\r\n"
