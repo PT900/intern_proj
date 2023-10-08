@@ -1,0 +1,58 @@
+Action2()
+{
+	web_set_max_html_param_len("100000");
+
+	web_set_sockets_option("SSL_VERSION", "AUTO");
+
+	lr_start_transaction("Transaction_Name_2");
+
+	// Status Code
+	web_reg_save_param_ex(
+		"ParamName=statusCode",
+		"LB=\"responseHeader\":{\"status\":\"",
+		"RB=\"",
+		"Ordinal=1",
+		SEARCH_FILTERS,
+		LAST);
+
+	web_rest("POST: {URL}",
+		"URL={URL}",
+		"Method=POST",
+		"EncType=raw",
+		"Snapshot=t382111.inf",
+		"Body={\r\n"
+		"{\r\n"
+		"\"customer_id\": 456,\r\n"
+		"\"order_items\": [\r\n"
+		"{\r\n"
+		"\"product_id\": 789,\r\n"
+		"\"quantity\": 2\r\n"
+		"},\r\n"
+		"{\r\n"
+		"\"product_id\": 101,\r\n"
+		"\"quantity\": 3\r\n"
+		"}\r\n"
+		"],\r\n"
+		"\"shipping_address\": \"123 Main St, Cityville\"\r\n"
+		"}",
+		HEADERS,
+		"Name=Content-Type", "Value=application/json", ENDHEADER,
+		LAST);
+
+	// lr_convert_string_encoding(lr_eval_string("{jsonMessage_6}"),LR_ENC_UTF8,LR_ENC_SYSTEM_LOCALE,"ResponseDataUTF8");
+
+	if ((strcmp(lr_eval_string("S"),lr_eval_string("{statusCode}"))) == 0) {
+
+		lr_end_transaction("Transaction_Name_2", LR_PASS);
+
+	} else {
+
+		lr_error_message("Transaction_Name_2 Error Descripstion %s", lr_eval_string("{jsonMessage_2}")
+		lr_end_transaction("Transaction_Name_2", LR_FAIL);
+
+		lr_exit(LR_EXIT_ITERATION_AND_CONTINUE, LR_AUTO);
+
+	}
+
+	return 0;
+}
