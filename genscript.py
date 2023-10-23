@@ -1,16 +1,38 @@
 import json
 import regex as re
 import random
+import os
 
 # Setup request file path here
-file_path = r'C:\Users\peat2\kbtg\test_json.txt'
+file_path_input = input("Enter JSON request file path: ")
+file_path = re.sub(r'"([^"]*)"', r'\1', file_path_input)
+
+# Working with directory
+current_path = os.getcwd()
+output_folder = os.path.join(current_path, "Output")
 
 # Function to save file as file_name and fufill content inside text file
 def save_to_file(file_name, content, default_head, default_tail):
-    with open(file_name, 'w') as file:
+    output_file_path = os.path.join(output_folder, file_name)
+    with open(output_file_path, 'w') as file:
         file.write(default_head)
         file.write(content)
         file.write(default_tail)
+
+# Function to clear output folder to always clear an old result
+def clear_output_folder(folder_path):
+    removed_files = 0
+    for filename in os.listdir(folder_path):
+        file_path = os.path.join(folder_path, filename)
+        try:
+            if os.path.isfile(file_path):
+                os.remove(file_path)
+                removed_files += 1
+        except Exception as e:
+            print(f"Error: Unable to delete {file_path}. {e}")
+
+    if removed_files > 0:
+        print(f"Removed {removed_files} file(s) from the 'Output' folder.")
 
 # Function to random the t[100000-999999] for realistically
 def generate_random_t1_inf():
@@ -71,7 +93,14 @@ def find_json_in_txt_file(file_path):
 
 # Default part
 if __name__ == "__main__":
+    # Clear all files before doing anything
+    clear_output_folder(output_folder)
+
     json_strings = find_json_in_txt_file(file_path)
+
+    # Create output folder if don't have one
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
 
     for i, json_str in enumerate(json_strings):
         # Default head of Action file
@@ -113,4 +142,4 @@ if __name__ == "__main__":
 
         if updated_request_string:
             save_to_file(f"Action{i + 1}.txt", updated_request_string, default_head_string, default_tail_string)
-            print(f"Request for JSON {i + 1} has been saved to 'Action{i + 1}.txt'.")
+            print(f"Request for JSON {i + 1} has been saved to 'Output/Action{i + 1}.txt'.")
